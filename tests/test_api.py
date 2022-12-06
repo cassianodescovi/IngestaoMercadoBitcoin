@@ -1,7 +1,7 @@
 import datetime
 import requests
 import pytest 
-from apis import DaySummaryApi, TradesApi, MercadoBitcoinApi
+from mercado_bitcoin.apis import DaySummaryApi, TradesApi, MercadoBitcoinApi
 from unittest.mock import patch
 
 class TestDaySummaryApi:
