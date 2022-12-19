@@ -1,6 +1,8 @@
 import datetime
 import json
+import boto3
 import os
+from tempfile import NamedTemporaryFile
 from typing import List
 
 
@@ -23,7 +25,7 @@ class DataWriter:
         with open(self.filename, "a") as f:
             f.write(row)
 
-    def write(self, data: [List, dict]):
+    def _write_to_file(self, data: [List, dict]):
         if isinstance(data, dict):
             self._write_row(json.dumps(data) + "\n")
         elif isinstance(data, List):
@@ -31,3 +33,29 @@ class DataWriter:
                 self.write(element)
         else:
             raise DataTypeNotSupportedForIngestionException(data)
+
+    def write(self, data: [List, dict]):
+        self._write_to_file(data=data)
+
+
+class S3Writer(DataWriter):
+    def __init__(self, coin: str, api: str) -> None:
+        super().__init__(coin, api)
+        self.tempfile = NamedTemporaryFile()
+        self.key = f"mercado_bitcoin/{self.api}/coin={self.coin}/extracted_at={datetime.datetime.now().date()}/{datetime.datetime.now()}.json"
+        self.s3 = boto3.client("s3")
+
+    def _write_row(self, row: str) -> None:
+        with open(self.tempfile.name, "a") as f:
+            f.write(row)
+
+    def write(self, data: [List, dict]):
+        self._write_to_file(data=data)
+        self._write_file_to_s3()
+
+    def _write_file_to_s3(self):
+        self.s3.put_object(
+            Body=self.tempfile,
+            Bucket="belisco-data-lake-raw",
+            Key=self.key
+        )
