@@ -1,0 +1,25 @@
+name: Run Tests on Features Branch
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - develop
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@V2
+      - name: Setup Python
+        uses: action/setup-python@V2
+        with:
+          python-version: '3.8'
+      
+      - name: Install deps
+        run: meke ci-setup
+      
+      - name: Run tests
+        run: make ci-test
