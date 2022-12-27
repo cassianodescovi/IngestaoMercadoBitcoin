@@ -525,3 +525,5 @@ MigrationBackup/
 
 day-summary/*
 *.checkpoint
+zappa_settings.json
+*.zip

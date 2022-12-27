@@ -14,7 +14,6 @@ class DataTypeNotSupportedForIngestionException(Exception):
 
 
 class DataWriter:
-
     def __init__(self, coin: str, api: str) -> None:
         self.api = api
         self.coin = coin
@@ -55,7 +54,5 @@ class S3Writer(DataWriter):
 
     def _write_file_to_s3(self):
         self.s3.put_object(
-            Body=self.tempfile,
-            Bucket="belisco-data-lake-raw",
-            Key=self.key
+            Body=self.tempfile, Bucket="belisco-data-lake-raw", Key=self.key
         )
