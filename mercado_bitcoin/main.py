@@ -2,13 +2,13 @@ import datetime
 import time
 
 from schedule import repeat, every, run_pending
-from ingestors import DaySummaryIngestor
-from writers import S3Writer
+from mercado_bitcoin.ingestors import DaySummaryIngestor
+from mercado_bitcoin.writers import DataWriter
 
 
 if __name__ == "__main__":
     day_summary_ingestor = DaySummaryIngestor(
-        writer=S3Writer,
+        writer=DataWriter,
         coins=["BTC", "ETH", "LTC", "BCH"],
         default_start_date=datetime.date(2021, 6, 1)
     )
@@ -22,4 +22,3 @@ if __name__ == "__main__":
     while True:
         run_pending()
         time.sleep(0.5)
-

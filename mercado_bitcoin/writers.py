@@ -1,9 +1,9 @@
 import datetime
 import json
-import boto3
 import os
-from tempfile import NamedTemporaryFile
 from typing import List
+from tempfile import NamedTemporaryFile
+import boto3
 
 
 class DataTypeNotSupportedForIngestionException(Exception):
