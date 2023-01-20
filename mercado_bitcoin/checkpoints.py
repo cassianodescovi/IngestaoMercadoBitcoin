@@ -4,6 +4,7 @@ from pynamodb.models import Model
 from pynamodb.attributes import UnicodeAttribute
 import logging
 
+
 logger = logging.getLogger()
 
 
