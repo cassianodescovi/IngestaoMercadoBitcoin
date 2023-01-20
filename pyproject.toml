@@ -15,6 +15,9 @@ boto3 = "^1.26.29"
 schedule = "^1.1.0"
 
 
+[tool.poetry.group.dev.dependencies]
+zappa = "^0.56.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

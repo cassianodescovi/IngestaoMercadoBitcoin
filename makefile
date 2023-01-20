@@ -3,4 +3,4 @@ clean:
 
 init: clean
 	pip install poetry
-	poetry install
+	poetry init
