@@ -12,13 +12,14 @@ boto3 = "^1.17.108"
 backoff = "^1.10.0"
 ratelimit = "^2.2.1"
 pynamodb = "^5.1.0"
+troposphere = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.6b0"
 pytest = "^6.2.4"
 flake8 = "^3.9.2"
 pre-commit = "^2.13.0"
-pytest-cov = "^2.12.1"
+pytest-cov = "^4.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
